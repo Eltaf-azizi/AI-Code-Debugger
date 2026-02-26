@@ -22,3 +22,20 @@ A professional, feature-rich AI-powered code analysis tool built with Streamlit 
 - **📜 Session History** - Track and revisit your analyses
 - **🎨 Modern UI** - Beautiful dark theme with gradient effects
 
+## 🚀 Quick Start
+
+1. **Install dependencies:**
+   ```bash
+   pip install -r requirements.txt
+   ```
+
+2. **Configure API Key:**
+   - Copy `.env.example` to `.env`
+   - Add your OpenAI API key: `OPENAI_API_KEY=sk-your-key-here`
+
+3. **Run the application:**
+   ```bash
+   streamlit run main.py
+   ```
+
+
