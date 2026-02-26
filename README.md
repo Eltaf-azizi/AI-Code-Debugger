@@ -38,4 +38,14 @@ A professional, feature-rich AI-powered code analysis tool built with Streamlit 
    streamlit run main.py
    ```
 
+## 📖 Usage
+
+1. Open the application in your browser (http://localhost:8501)
+2. Enter your OpenAI API key in the sidebar (or use .env)
+3. Select the programming language (or use auto-detect)
+4. Choose an action (Explain, Debug, Optimize, Security, etc.)
+5. Paste your code or upload a file
+6. Click "Run Analysis" to get AI-powered insights
+
+
 
