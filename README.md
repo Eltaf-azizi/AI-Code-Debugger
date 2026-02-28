@@ -47,5 +47,16 @@ A professional, feature-rich AI-powered code analysis tool built with Streamlit 
 5. Paste your code or upload a file
 6. Click "Run Analysis" to get AI-powered insights
 
+## 🎯 Actions
 
+| Action | Description |
+|--------|-------------|
+| ✨ Explain | Understand what the code does |
+| 🐛 Debug | Find and fix bugs |
+| 🚀 Optimize | Improve performance |
+| 🛡️ Security | Check for vulnerabilities |
+| 🔄 Refactor | Improve code structure |
+| 🧪 Test | Generate unit tests |
+| 📝 Docs | Generate documentation |
+| 👀 Review | Comprehensive code review |
 
