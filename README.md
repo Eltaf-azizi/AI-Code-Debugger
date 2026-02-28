@@ -70,3 +70,24 @@ A professional, feature-rich AI-powered code analysis tool built with Streamlit 
 
 ### Supported Languages
 Python, JavaScript, TypeScript, Java, C++, C#, Go, Rust, Ruby, PHP, Swift, Kotlin, SQL, HTML, CSS, and more.
+
+## 📁 Project Structure
+
+```
+AI Code Debugger/
+├── main.py                 # Application entry point
+├── src/
+│   ├── core/
+│   │   ├── ai_engine.py   # AI analysis engine
+│   │   └── prompts.py     # AI prompt templates
+│   ├── ui/
+│   │   ├── components.py  # UI components
+│   │   └── layout.py     layout
+│   # Application └── utils/
+│       └── config.py     # Configuration
+├── .streamlit/
+│   └── config.toml       # Streamlit config
+├── requirements.txt      # Dependencies
+└── .env.example         # Environment template
+```
+
