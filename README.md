@@ -91,3 +91,13 @@ AI Code Debugger/
 └── .env.example         # Environment template
 ```
 
+## 🔒 Security
+
+- Your code is sent to OpenAI for processing
+- No code is stored on any server
+- API key is kept local
+
+## 🤝 Contributing
+
+Contributions are welcome! Please feel free to submit a Pull Request.
+
