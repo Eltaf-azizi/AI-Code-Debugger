@@ -60,3 +60,13 @@ A professional, feature-rich AI-powered code analysis tool built with Streamlit 
 | 📝 Docs | Generate documentation |
 | 👀 Review | Comprehensive code review |
 
+## 🛠️ Configuration
+
+### Environment Variables
+- `OPENAI_API_KEY` - Your OpenAI API key
+- `MODEL_NAME` - AI model to use (default: gpt-4)
+- `TEMPERATURE` - Response creativity (0.0-1.0)
+- `MAX_TOKENS` - Maximum response length
+
+### Supported Languages
+Python, JavaScript, TypeScript, Java, C++, C#, Go, Rust, Ruby, PHP, Swift, Kotlin, SQL, HTML, CSS, and more.
