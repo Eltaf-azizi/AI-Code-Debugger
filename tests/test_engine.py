@@ -3,8 +3,8 @@ Unit tests for the AI Code Debugger engine.
 """
 import pytest
 from unittest.mock import Mock, patch, MagicMock
-from src.core.prompts detect_language
-from import PromptTemplates, src.core.ai_engine import CodeAnalyzer, DebuggingSession, AnalysisResult
+from src.core.prompts import PromptTemplates, detect_language
+from src.core.ai_engine import CodeAnalyzer, DebuggingSession, AnalysisResult
 
 
 class TestPromptTemplates:
