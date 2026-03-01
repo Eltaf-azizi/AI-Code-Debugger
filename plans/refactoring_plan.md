@@ -121,3 +121,89 @@ ai-code-assistant/
 
 ---
 
+## Detailed Migration Steps
+
+### Phase 1: Foundation (Step 1-3)
+
+#### Step 1: Create Directory Structure
+Create all directories as outlined in target architecture.
+
+#### Step 2: Migrate Configuration
+- Move `src/utils/config.py` → `app/config.py`
+- Add new settings:
+  - `DATABASE_URL`
+  - `LOG_LEVEL`
+  - `MAX_FILE_SIZE`
+  - `CHUNK_SIZE`
+  - `CACHE_ENABLED`
+
+#### Step 3: Set Up FastAPI Main Entry
+- Create `app/main.py` with FastAPI app
+- Include middleware (CORS, logging)
+- Register API routes
+
+### Phase 2: Core Services (Step 4-6)
+
+#### Step 4: Create Service Layer
+| Service | Source | Purpose |
+|---------|--------|---------|
+| `ai_service.py` | `ai_engine.py` | OpenAI integration |
+| `summarizer_service.py` | New | Code summarization logic |
+| `debugger_service.py` | New | Debugging with static analysis |
+| `improvement_service.py` | New | Optimization & refactoring |
+| `prompt_templates.py` | `prompts.py` | Migrate existing prompts |
+
+#### Step 5: Create Core Utilities
+- `chunking.py`: Split large files into manageable chunks
+- `tokenizer.py`: Count tokens, enforce limits
+- `language_detector.py`: Detect programming language
+- `error_parser.py`: Parse Python/JavaScript errors
+
+#### Step 6: Create Language Analyzers
+- `python_analyzer.py`: Use `ast` module, pylint integration
+- `js_analyzer.py`: Use ESLint, Babel parser
+- `security_scanner.py`: Detect OWASP Top 10 vulnerabilities
+- `ast_parser.py`: Generic AST traversal
+
+### Phase 3: API & Models (Step 7-9)
+
+#### Step 7: Define Pydantic Models
+**Request Models** (`app/models/request_models.py`):
+```python
+class AnalyzeCodeRequest(BaseModel):
+    code: str
+    language: Optional[str] = "auto"
+    action: str  # summarize, debug, explain, optimize, security
+```
+
+**Response Models** (`app/models/response_models.py`):
+```python
+class SummarizationResponse(BaseModel):
+    file_summary: str
+    functions: List[FunctionSummary]
+    classes: List[ClassSummary]
+    complexity_level: str
+
+class DebuggingResponse(BaseModel):
+    syntax_errors: List[SyntaxError]
+    logical_issues: List[LogicalIssue]
+    corrected_code: Optional[str]
+```
+
+#### Step 8: Create API Routes
+| Endpoint | Method | Purpose |
+|----------|--------|---------|
+| `/api/v1/summarize` | POST | Summarize code |
+| `/api/v1/debug` | POST | Find and fix bugs |
+| `/api/v1/explain` | POST | Explain code |
+| `/api/v1/optimize` | POST | Optimize performance |
+| `/api/v1/security` | POST | Security analysis |
+| `/api/v1/health` | GET | Health check |
+
+#### Step 9: Database Setup
+- Set up SQLAlchemy connection
+- Create CRUD operations for:
+  - Analysis history
+  - User sessions
+  - Code snippets
+
