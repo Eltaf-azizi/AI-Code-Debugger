@@ -207,3 +207,124 @@ class DebuggingResponse(BaseModel):
   - User sessions
   - Code snippets
 
+### Phase 4: Infrastructure (Step 10-14)
+
+#### Step 10: Update Dependencies
+New packages needed:
+```
+fastapi
+uvicorn
+pydantic
+sqlalchemy
+python-multipart
+```
+
+#### Step 11: Docker Configuration
+- Create Dockerfile with Python 3.11
+- Set up docker-compose with:
+  - API service
+  - PostgreSQL database
+  - Optional: Redis for caching
+
+#### Step 12: Update Tests
+- Create unit tests for each service
+- Create API integration tests
+- Maintain test coverage > 80%
+
+#### Step 13: Update README
+- Document new architecture
+- Include output schemas (JSON format)
+- Add success criteria
+- Include setup instructions
+
+#### Step 14: Verify & Deploy
+- Run all tests
+- Test API endpoints
+- Deploy to cloud (Render/Replit/Vercel)
+
+---
+
+## Output Schemas
+
+### A. Code Summarization
+```json
+{
+  "file_summary": "This file handles user authentication...",
+  "functions": [{"name": "login_user", "summary": "..."}],
+  "classes": [{"name": "AuthService", "summary": "..."}],
+  "complexity_level": "Medium"
+}
+```
+
+### B. Debugging Output
+```json
+{
+  "syntax_errors": [{"line": 12, "error": "...", "fix": "..."}],
+  "logical_issues": [{"line": 24, "issue": "...", "suggestion": "..."}],
+  "corrected_code": "..."
+}
+```
+
+### C. Security Analysis
+```json
+{
+  "security_risks": [
+    {"line": 18, "risk": "SQL Injection", "severity": "High", "fix": "..."}
+  ]
+}
+```
+
+### D. Code Improvement
+```json
+{
+  "performance_suggestions": [{"line": 30, "issue": "O(n^2)", "improvement": "..."}],
+  "refactor_suggestions": [{"area": "function", "suggestion": "..."}]
+}
+```
+
+---
+
+## Success Criteria
+
+| Category | Metric |
+|----------|--------|
+| Functional | Works for Python & JavaScript |
+| Functional | Handles files up to 2,000+ lines |
+| Functional | Returns structured JSON 95% of time |
+| Technical | Clean modular codebase |
+| Technical | Each service independent |
+| AI Quality | Summary is accurate |
+| AI Quality | Bugs explained clearly |
+| AI Quality | No hallucinated errors |
+
+---
+
+## Migration Priority
+
+```
+HIGH PRIORITY (Migrate First):
+├── app/config.py
+├── app/services/ai_service.py
+├── app/services/prompt_templates.py
+└── app/core/language_detector.py
+
+MEDIUM PRIORITY (Next Phase):
+├── app/api/routes/*
+├── app/models/*
+├── app/core/* (chunking, tokenizer, error_parser)
+└── app/analyzers/*
+
+LOW PRIORITY (Later):
+├── app/database/*
+├── docker/*
+└── frontend/
+```
+
+---
+
+## Notes
+
+1. **Backward Compatibility**: Keep old Streamlit UI working during migration
+2. **Incremental Changes**: Migrate one feature at a time
+3. **Testing**: Write tests before migrating each component
+4. **Documentation**: Update README after each major change
