@@ -22,7 +22,7 @@ class AnalyzeCodeRequest(BaseModel):
 
 class SummarizeRequest(AnalyzeCodeRequest):
     """Request model for code summarization."""
-    structured(True, description=": bool = FieldReturn structured JSON response")
+    structured: bool = Field(True, description="Return structured JSON response")
 
 
 class DebugRequest(AnalyzeCodeRequest):

@@ -1,12 +1,12 @@
-# AI Code Assistant - Docker Compose
-
 version: '3.8'
 
 services:
+  # API Service
   api:
     build:
       context: ..
       dockerfile: docker/Dockerfile
+    container_name: ai-code-assistant-api
     ports:
       - "8000:8000"
     environment:
@@ -17,19 +17,35 @@ services:
       - DATABASE_URL=${DATABASE_URL:-sqlite:///./ai_code_assistant.db}
       - DEBUG=${DEBUG:-false}
     volumes:
-      - ..:/app
+      - ../app:/app/app
+      - db-data:/app/data
     restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8000/api/v1/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 10s
 
-  # Optional: PostgreSQL database
-  # db:
-  #   image: postgres:15
+  # Optional: Frontend Service (if using separate frontend)
+  # frontend:
+  #   build:
+  #     context: ../frontend
+  #     dockerfile: Dockerfile
+  #   container_name: ai-code-assistant-frontend
+  #   ports:
+  #     - "3000:3000"
   #   environment:
-  #     - POSTGRES_USER=ai_code
-  #     - POSTGRES_PASSWORD=password
-  #     - POSTGRES_DB=ai_code_assistant
-  #   volumes:
-  #     - postgres_data:/var/lib/postgresql/data
+  #     - NEXT_PUBLIC_API_URL=http://api:8000
+  #   depends_on:
+  #     - api
   #   restart: unless-stopped
 
 volumes:
-  # postgres_data:
+  db-data:
+    driver: local
+
+networks:
+  default:
+    name: ai-code-assistant-network
+    driver: bridge
