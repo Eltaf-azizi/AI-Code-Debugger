@@ -6,34 +6,7 @@ from sqlalchemy.orm import Session
 from typing import List, Optional
 from datetime import datetime
 
-from app.database.connection import Base
-from sqlalchemy import Column, Integer, String, DateTime, Text, JSON
-
-
-class AnalysisHistory(Base):
-    """Analysis history model."""
-    __tablename__ = "analysis_history"
-    
-    id = Column(Integer, primary_key=True, index=True)
-    code_hash = Column(String(64), index=True)
-    language = Column(String(50))
-    action = Column(String(50))
-    result = Column(Text)
-    metadata = Column(JSON)
-    created_at = Column(DateTime, default=datetime.utcnow)
-
-
-class CodeSnippet(Base):
-    """Code snippet storage."""
-    __tablename__ = "code_snippets"
-    
-    id = Column(Integer, primary_key=True, index=True)
-    name = Column(String(255))
-    code = Column(Text)
-    language = Column(String(50))
-    description = Column(Text)
-    created_at = Column(DateTime, default=datetime.utcnow)
-    updated_at = Column(DateTime, default=datetime.utcnow, onupdate=datetime.utcnow)
+from app.models.db_models import CodeSnippet, AnalysisHistory
 
 
 # ============== Analysis History CRUD ==============
