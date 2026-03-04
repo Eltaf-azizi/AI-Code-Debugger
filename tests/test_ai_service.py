@@ -58,3 +58,78 @@ class TestAIService:
         result = service.analyze("print('hello')", "explain", "python")
         assert result == "Test response"
     
+
+    def test_analyze_structured(self, mock_settings):
+        """Test analyze_structured method."""
+        from app.services.ai_service import AIService
+        
+        mock_client = Mock()
+        mock_response = Mock()
+        mock_response.choices = [Mock()]
+        mock_response.choices[0].message.content = '{"file_summary": "test", "functions": [], "classes": [], "complexity_level": "Low"}'
+        mock_client.chat.completions.create.return_value = mock_response
+        
+        with patch('app.services.ai_service.OpenAI', return_value=mock_client):
+            service = AIService()
+            result = service.analyze_structured("print('hello')", "summarize", "python")
+            
+            assert result["file_summary"] == "test"
+            assert result["complexity_level"] == "Low"
+    
+    def test_get_system_prompt(self, mock_settings):
+        """Test system prompt retrieval."""
+        from app.services.ai_service import AIService
+        service = AIService()
+        
+        summarize_prompt = service._get_system_prompt("summarize")
+        debug_prompt = service._get_system_prompt("debug")
+        
+        assert summarize_prompt is not None
+        assert debug_prompt is not None
+    
+    def test_get_action_context(self, mock_settings):
+        """Test action context retrieval."""
+        from app.services.ai_service import AIService
+        service = AIService()
+        
+        debug_context = service._get_action_context("debug")
+        optimize_context = service._get_action_context("optimize")
+        
+        assert "bugs" in debug_context.lower() or "bug" in debug_context.lower()
+        assert "performance" in optimize_context.lower()
+
+
+class TestPromptTemplates:
+    """Test prompt templates."""
+    
+    def test_all_prompts_exist(self):
+        """Test all prompt templates exist."""
+        from app.services.prompt_templates import PromptTemplates
+        
+        assert PromptTemplates.EXPLAIN_SYSTEM is not None
+        assert PromptTemplates.DEBUG_SYSTEM is not None
+        assert PromptTemplates.OPTIMIZE_SYSTEM is not None
+        assert PromptTemplates.SECURITY_SYSTEM is not None
+        assert PromptTemplates.SUMMARIZE_SYSTEM is not None
+    
+    def test_get_user_prompt(self):
+        """Test user prompt generation."""
+        from app.services.prompt_templates import PromptTemplates
+        
+        code = "def hello():\n    print('hello')"
+        prompt = PromptTemplates.get_user_prompt(code, "python")
+        
+        assert code in prompt
+    
+    def test_get_multi_language_prompt(self):
+        """Test multi-language prompt generation."""
+        from app.services.prompt_templates import PromptTemplates
+        
+        code = "def hello():\n    print('hello')"
+        prompt = PromptTemplates.get_multi_language_prompt(code)
+        
+        assert code in prompt
+
+
+if __name__ == "__main__":
+    pytest.main([__file__, "-v"])
