@@ -239,6 +239,21 @@ pytest --cov=app tests/
 | `DEBUG` | Debug mode | `false` |
 | `LOG_LEVEL` | Logging level | `INFO` |
 
+## 🏗️ Architecture
+
+### Backend (FastAPI)
+The backend is built with FastAPI and follows a modular architecture:
+- **API Layer**: REST endpoints for each feature
+- **Service Layer**: Business logic and AI integration
+- **Core Layer**: Utilities for tokenization, chunking, language detection
+- **Analyzer Layer**: Static code analysis for Python and JavaScript
+- **Database Layer**: SQLAlchemy ORM for data persistence
+
+### Frontend (Next.js)
+The frontend is built with Next.js 14:
+- **Components**: CodeEditor, ResultViewer
+- **Services**: API client for backend communication
+- **Pages**: Main application interface
 
 ## 🤝 Contributing
 
